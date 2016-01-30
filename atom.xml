@@ -4,7 +4,7 @@
   <title><![CDATA[Jakob Class]]></title>
   <link href="http://mikrobi.github.com/atom.xml" rel="self"/>
   <link href="http://mikrobi.github.com/"/>
-  <updated>2016-01-30T16:16:52+01:00</updated>
+  <updated>2016-01-30T16:43:31+01:00</updated>
   <id>http://mikrobi.github.com/</id>
   <author>
     <name><![CDATA[Jakob Class]]></name>
@@ -34,7 +34,7 @@
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>  git clone -b <span class="nb">source </span>git@github.com:mikrobi/mikrobi.github.com.git blog
 </span><span class='line'>  <span class="nb">cd </span>blog
 </span><span class='line'>  bundle install
-</span><span class='line'>  bundle <span class="nb">exec </span>rake setup_github_pages
+</span><span class='line'>  rake setup_github_pages
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -45,23 +45,30 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>  git checkout master
-</span><span class='line'>  git fetch --all
-</span><span class='line'>  git reset --hard origin/master
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="nb">cd </span>_deploy/
+</span><span class='line'>  git fetch
+</span><span class='line'>  git reset origin/master --hard
+</span><span class='line'>  <span class="nb">cd</span> ..
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>That&#8217;s it! Now I can create a new blog post as usual:</p>
 
-<p><code>` bash
-  git checkout source
-  bundle exec rake new_post["New post"]
-  git add .
-  git commit -m "Add new post"
-  rake generate
-  git push origin source
-  rake deploy
-</code></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  rake new_post<span class="o">[</span><span class="s2">&quot;New post&quot;</span><span class="o">]</span>
+</span><span class='line'>  rake generate
+</span><span class='line'>  git add .
+</span><span class='line'>  git commit -m <span class="s2">&quot;Add new post&quot;</span>
+</span><span class='line'>  git push origin <span class="nb">source </span>
+</span><span class='line'><span class="nb">  </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
