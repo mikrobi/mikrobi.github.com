@@ -1,41 +1,28 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url>
-        <loc>
-            http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/
-        </loc>
-        <lastmod>2016-01-30T16:37:28+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic/
-        </loc>
-        <lastmod>2016-01-30T16:37:28+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://mikrobi.github.com/validating-has-and-belongs-to-many-associations-with-rails-3/
-        </loc>
-        <lastmod>2016-01-30T16:37:28+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://mikrobi.github.com/how-to-recover-your-local-octopress-repository/</loc>
-        <lastmod>2016-01-30T16:42:43+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://mikrobi.github.com/about/</loc>
-        <lastmod>2016-01-30T16:37:28+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://mikrobi.github.com/blog/archives/</loc>
-        <lastmod>2016-01-30T16:42:43+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://mikrobi.github.com/</loc>
-        <lastmod>2016-01-30T16:42:43+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://mikrobi.github.com/robots.txt</loc>
-        <lastmod>2016-01-30T16:37:28+01:00</lastmod>
-    </url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://mikrobi.github.com/how-to-recover-your-local-octopress-repository/</loc>
+<lastmod>2016-01-30T15:05:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://mikrobi.github.com/validating-has-and-belongs-to-many-associations-with-rails-3/</loc>
+<lastmod>2013-02-03T10:38:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic/</loc>
+<lastmod>2013-01-16T19:11:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/</loc>
+<lastmod>2013-01-16T14:58:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://mikrobi.github.com/blog/archives/</loc>
+</url>
+<url>
+<loc>http://mikrobi.github.com/</loc>
+</url>
+<url>
+<loc>http://mikrobi.github.com/about/</loc>
+</url>
 </urlset>

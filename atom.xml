@@ -4,7 +4,7 @@
   <title><![CDATA[Jakob Class]]></title>
   <link href="http://mikrobi.github.com/atom.xml" rel="self"/>
   <link href="http://mikrobi.github.com/"/>
-  <updated>2016-01-30T16:43:31+01:00</updated>
+  <updated>2016-01-30T16:59:37+01:00</updated>
   <id>http://mikrobi.github.com/</id>
   <author>
     <name><![CDATA[Jakob Class]]></name>
@@ -18,9 +18,9 @@
     <link href="http://mikrobi.github.com/how-to-recover-your-local-octopress-repository/"/>
     <updated>2016-01-30T15:05:00+01:00</updated>
     <id>http://mikrobi.github.com/how-to-recover-your-local-octopress-repository</id>
-    <content type="html"><![CDATA[<p>I am <a href="http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/">hosting my blog</a> on <a href="http://pages.github.com/">GitHub pages</a>. Due to a broken hard disk I&#8217;ve recently lost my local respository containing the Octopress sources. A simple <code>git clone</code> is not enough to recover the local repository because Octopress works with two branches: <code>source</code> for keeping the files to generate the static site and <code>master</code> that contains the site itself. The <code>master</code> branch is stored in the <code>_deploy</code> subfolder which is ignored by default in the <code>source</code> branch.</p>
+    <content type="html"><![CDATA[<p>I am <a href="http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/">hosting my blog</a> on <a href="http://pages.github.com/">GitHub pages</a>. Due to a broken hard disk I&rsquo;ve recently lost my local respository containing the Octopress sources. A simple <code>git clone</code> is not enough to recover the local repository because Octopress works with two branches: <code>source</code> for keeping the files to generate the static site and <code>master</code> that contains the site itself. The <code>master</code> branch is stored in the <code>_deploy</code> subfolder which is ignored by default in the <code>source</code> branch.</p>
 
-<p>Here is how I&#8217;ve recovered my local repository to deploy new content:</p>
+<p>Here is how I&rsquo;ve recovered my local repository to deploy new content:</p>
 
 <!-- more -->
 
@@ -40,7 +40,7 @@
 
 <p>I provided <code>git@github.com:mikrobi/mikrobi.github.com.git</code> as the repository URL.</p>
 
-<p>And finally I&#8217;ve updated my local <code>master</code> from <code>origin</code>:</p>
+<p>And finally I&rsquo;ve updated my local <code>master</code> from <code>origin</code>:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -53,7 +53,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>That&#8217;s it! Now I can create a new blog post as usual:</p>
+<p>That&rsquo;s it! Now I can create a new blog post as usual:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -326,7 +326,7 @@ Finished in 0.15135 seconds
     <link href="http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/"/>
     <updated>2013-01-16T14:58:00+01:00</updated>
     <id>http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress</id>
-    <content type="html"><![CDATA[<p>Today I decided to start a personal blog for sharing my thoughts, experiences and ideas about my work as a software developer. After a brief research on which blog system to use and where to (freely) host it, I came up with a solution based on <a href="http://octopress.org">Octopress</a> that runs on <a href="http://pages.github.com">GitHub Pages</a>. It&#8217;s completely free and (for people familiar with standard developer tools) easy to set up.</p>
+    <content type="html"><![CDATA[<p>Today I decided to start a personal blog for sharing my thoughts, experiences and ideas about my work as a software developer. After a brief research on which blog system to use and where to (freely) host it, I came up with a solution based on <a href="http://octopress.org">Octopress</a> that runs on <a href="http://pages.github.com">GitHub Pages</a>. It&rsquo;s completely free and (for people familiar with standard developer tools) easy to set up.</p>
 
 <!-- more -->
 
@@ -335,8 +335,8 @@ Finished in 0.15135 seconds
 
 <ol>
 <li>Create a <a href="http://www.github.com" title="GitHub">GitHub</a> repository named <code>username.github.com</code>, in my case <a href="http://mikrobi.github.com" title="Blog of Jakob Class">mikrobi.github.com</a>.</li>
-<li>(Optional) If you&#8217;d like to enable commenting on your blog posts, sign up at <a href="http://disqus.com">Disqus</a> and set up your new site.</li>
-<li>(Optional) In case you want to analyse your blog&#8217;s visitors and see if anyone is interested in your website at all, create a <a href="https://www.google.com/analytics">Google Analytics</a> account to receive a tracking ID for your blog.</li>
+<li>(Optional) If you&rsquo;d like to enable commenting on your blog posts, sign up at <a href="http://disqus.com">Disqus</a> and set up your new site.</li>
+<li>(Optional) In case you want to analyse your blog&rsquo;s visitors and see if anyone is interested in your website at all, create a <a href="https://www.google.com/analytics">Google Analytics</a> account to receive a tracking ID for your blog.</li>
 <li>Download the current version of <a href="http://octopress.org">Octopress</a> into your desired folder and enter that folder, in my case <code>blog</code>:
 <pre>
   $ git clone git://github.com/imathis/octopress.git blog
@@ -360,12 +360,12 @@ Finished in 0.15135 seconds
 <li>Commit your sources into your repository:
 <pre>
   git add .
-  git commit -m 'initial commit'
+  git commit -m &lsquo;initial commit&rsquo;
   git push origin source
 </pre></li>
 <li>Write your first post:
 <pre>
-$ rake new_post["My First Blog Post"]
+  $ rake new_post[&ldquo;My First Blog Post&rdquo;]
 </pre></li>
 </ol>
 
