@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Jakob Class</title>
+  <title>Merging I18n Translations for SimpleForm and Formtastic - Jakob Class</title>
   <meta name="author" content="Jakob Class">
 
   
-  <meta name="description" content="I am hosting my blog on GitHub pages. Due to a broken hard disk I&#8217;ve recently lost my local respository containing the Octopress sources. A &hellip;">
+  <meta name="description" content="In a current Rails project we are using SimpleForm to create forms in view templates. The backend is based on ActiveAdmin that uses Formtastic for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mikrobi.github.com/">
+  <link rel="canonical" href="http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -75,99 +75,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/how-to-recover-your-local-octopress-repository/">How to recover your local Octopress repository</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-01-30T15:05:00+01:00" pubdate data-updated="true">Jan 30<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I am <a href="/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/">hosting my blog</a> on <a href="http://pages.github.com/">GitHub pages</a>. Due to a broken hard disk I&#8217;ve recently lost my local respository containing the Octopress sources. A simple <code>git clone</code> is not enough to recover the local repository because Octopress works with two branches: <code>source</code> for keeping the files to generate the static site and <code>master</code> that contains the site itself. The <code>master</code> branch is stored in the <code>_deploy</code> subfolder which is ignored by default in the <code>source</code> branch.</p>
-
-<p>Here is how I&#8217;ve recovered my local repository to deploy new content:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/how-to-recover-your-local-octopress-repository/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/validating-has-and-belongs-to-many-associations-with-rails-3/">Validating has_and_belongs_to_many Associations with Rails 3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-03T10:38:00+01:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This week I had to deal with validating a <code>has_and_belongs_to_many</code> association. Unfortunately I had to realize that ActiveRecord is not able to properly validate these kind of associations. Even when validation fails, associations are stored in the database. However ActiveRecord can be adjusted with the <a href="https://github.com/MartinKoerner/deferred_associations">deferred_associations gem</a> to prevent invalid associations being persisted.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/validating-has-and-belongs-to-many-associations-with-rails-3/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/merging-i18n-translations-for-simpleform-and-formtastic/">Merging I18n Translations for SimpleForm and Formtastic</a></h1>
+      <h1 class="entry-title">Merging I18n Translations for SimpleForm and Formtastic</h1>
     
     
       <p class="meta">
@@ -190,7 +103,7 @@
   </header>
 
 
-  <div class="entry-content"><p>In a current Rails project we are using <a href="https://github.com/plataformatec/simple_form">SimpleForm</a> to create forms in view templates. The backend is based on <a href="http://activeadmin.info">ActiveAdmin</a> that uses <a href="https://github.com/justinfrench/formtastic">Formtastic</a> for creating forms. As the application should support different languages we defined translations for labels, placeholders, hints and so on for the front-end (<a href="https://github.com/plataformatec/simple_form">SimpleForm</a>):</p>
+<div class="entry-content"><p>In a current Rails project we are using <a href="https://github.com/plataformatec/simple_form">SimpleForm</a> to create forms in view templates. The backend is based on <a href="http://activeadmin.info">ActiveAdmin</a> that uses <a href="https://github.com/justinfrench/formtastic">Formtastic</a> for creating forms. As the application should support different languages we defined translations for labels, placeholders, hints and so on for the front-end (<a href="https://github.com/plataformatec/simple_form">SimpleForm</a>):</p>
 
 <figure class='code'><figcaption><span>config/locales/forms.de.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -248,22 +161,16 @@
 
 <p>The <code>simple_form</code> namespace is simply aliased with <code>form_definitions</code> and merged into the <code>formtastic</code> namespace.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/">Creating a Free Blog in 10 Minutes with GitHub Pages and Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jakob Class</span></span>
+
+      
 
 
 
@@ -275,32 +182,44 @@
   
 
 
-<time datetime="2013-01-16T14:58:00+01:00" pubdate data-updated="true">Jan 16<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-01-16T19:11:00+01:00" pubdate data-updated="true">Jan 16<span>th</span>, 2013</time>
+      
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic/" data-via="" data-counturl="http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/" title="Previous Post: Creating a Free Blog in 10 Minutes with GitHub Pages and Octopress">&laquo; Creating a Free Blog in 10 Minutes with GitHub Pages and Octopress</a>
+      
+      
+        <a class="basic-alignment right" href="/validating-has-and-belongs-to-many-associations-with-rails-3/" title="Next Post: Validating has_and_belongs_to_many Associations with Rails 3">Validating has_and_belongs_to_many Associations with Rails 3 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
 
-  <div class="entry-content"><p>Today I decided to start a personal blog for sharing my thoughts, experiences and ideas about my work as a software developer. After a brief research on which blog system to use and where to (freely) host it, I came up with a solution based on <a href="http://octopress.org">Octopress</a> that runs on <a href="http://pages.github.com">GitHub Pages</a>. It&#8217;s completely free and (for people familiar with standard developer tools) easy to set up.</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -329,7 +248,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/mikrobi">@mikrobi</a> on GitHub
@@ -363,6 +282,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -377,7 +297,10 @@
       var disqus_shortname = 'mikrobi';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic/';
+        var disqus_url = 'http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

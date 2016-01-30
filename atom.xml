@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Jakob Class]]></title>
+  <link href="http://mikrobi.github.com/atom.xml" rel="self"/>
+  <link href="http://mikrobi.github.com/"/>
+  <updated>2016-01-30T16:14:02+01:00</updated>
+  <id>http://mikrobi.github.com/</id>
+  <author>
+    <name><![CDATA[Jakob Class]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to recover your local Octopress repository]]></title>
+    <link href="http://mikrobi.github.com/how-to-recover-your-local-octopress-repository/"/>
+    <updated>2016-01-30T15:05:00+01:00</updated>
+    <id>http://mikrobi.github.com/how-to-recover-your-local-octopress-repository</id>
+    <content type="html"><![CDATA[<p>I am <a href="http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/">hosting my blog</a> on <a href="http://pages.github.com/">GitHub pages</a>. Due to a broken hard disk I&#8217;ve recently lost my local respository containing the Octopress sources. A simple <code>git clone</code> is not enough to recover the local repository because Octopress works with two branches: <code>source</code> for keeping the files to generate the static site and <code>master</code> that contains the site itself. The <code>master</code> branch is stored in the <code>_deploy</code> subfolder which is ignored by default in the <code>source</code> branch.</p>
+
+<p>Here is how I&#8217;ve recovered my local repository to deploy new content:</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  git clone -b <span class="nb">source </span>git@github.com:mikrobi/mikrobi.github.com.git blog
+</span><span class='line'>  <span class="nb">cd </span>blog
+</span><span class='line'>  bundle install
+</span><span class='line'>  bundle <span class="nb">exec </span>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I provided <code>git@github.com:mikrobi/mikrobi.github.com.git</code> as the repository URL.</p>
+
+<p>And finally I&#8217;ve updated my local <code>master</code> from <code>origin</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  git checkout master
+</span><span class='line'>  git fetch --all
+</span><span class='line'>  git reset --hard origin/master
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s it! Now I can create a new blog post as usual:</p>
+
+<p><code>` bash
+  git checkout source
+  bundle exec rake new_post["New post"]
+  git add .
+  git commit -m "Add new post"
+  rake generate
+  git push origin source
+  rake deploy
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Validating has_and_belongs_to_many Associations with Rails 3]]></title>
+    <link href="http://mikrobi.github.com/validating-has-and-belongs-to-many-associations-with-rails-3/"/>
+    <updated>2013-02-03T10:38:00+01:00</updated>
+    <id>http://mikrobi.github.com/validating-has-and-belongs-to-many-associations-with-rails-3</id>
+    <content type="html"><![CDATA[<p>This week I had to deal with validating a <code>has_and_belongs_to_many</code> association. Unfortunately I had to realize that ActiveRecord is not able to properly validate these kind of associations. Even when validation fails, associations are stored in the database. However ActiveRecord can be adjusted with the <a href="https://github.com/MartinKoerner/deferred_associations">deferred_associations gem</a> to prevent invalid associations being persisted.</p>
+
+<!-- more -->
+
+
+<p>In case of two models that have a n:m relationship, e.g groups and users, you can create a join table for storing associations between groups and users and use the <a href="http://apidock.com/rails/ActiveRecord/Associations/ClassMethods/has_and_belongs_to_many">has_and_belongs_to_many macro</a> to make ActiveRecord manage this join table.</p>
+
+<p>In the following example a custom validation is defined to ensure a group does not consist of more than 10 users.</p>
+
+<figure class='code'><figcaption><span>app/models/group.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Group</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_and_belongs_to_many</span> <span class="ss">:users</span>
+</span><span class='line'>  <span class="n">validate</span> <span class="ss">:has_ten_or_less_users</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">has_ten_or_less_users</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:users</span><span class="p">,</span> <span class="s1">&#39;not more than 10 users allowed&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">users</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">10</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At first glance the validation seems to do the job and the following spec is passing:</p>
+
+<figure class='code'><figcaption><span>spec/models/group_spec.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="no">Group</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">describe</span> <span class="s1">&#39;#users&#39;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">context</span> <span class="s1">&#39;when assigning to one user&#39;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">before</span> <span class="p">{</span> <span class="n">subject</span><span class="o">.</span><span class="n">users</span> <span class="o">&lt;&lt;</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="p">}</span>
+</span><span class='line'>      <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_valid</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">context</span> <span class="s1">&#39;when assigning to more than 10 users&#39;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">before</span> <span class="k">do</span>
+</span><span class='line'>        <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">subject</span><span class="o">.</span><span class="n">users</span> <span class="o">&lt;&lt;</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">be_valid</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But after assigning 11 users to a group there will be 11 entries persisted in the join table, although the validation fails. This is because ActiveRecords inserts the references into the join table right after assignment before any validations are tested. The following spec is not passing any more:</p>
+
+<figure class='code'><figcaption><span>spec/models/group_spec.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="no">Group</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">describe</span> <span class="s1">&#39;#users&#39;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">context</span> <span class="s1">&#39;when assigning to one user&#39;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">before</span> <span class="p">{</span> <span class="n">subject</span><span class="o">.</span><span class="n">users</span> <span class="o">&lt;&lt;</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="p">}</span>
+</span><span class='line'>      <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">be_valid</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">context</span> <span class="s1">&#39;when assigning to more than 10 users&#39;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">before</span> <span class="k">do</span>
+</span><span class='line'>        <span class="n">subject</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>        <span class="mi">11</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">subject</span><span class="o">.</span><span class="n">users</span> <span class="o">&lt;&lt;</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">be_valid</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">specify</span> <span class="s1">&#39;associations should not be stored&#39;</span> <span class="k">do</span>
+</span><span class='line'>        <span class="c1"># reload group from DB to make sure that</span>
+</span><span class='line'>        <span class="c1"># invalid associations have not been stored</span>
+</span><span class='line'>        <span class="n">subject</span><span class="o">.</span><span class="n">reload</span>
+</span><span class='line'>        <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="o">.</span><span class="n">users</span><span class="p">)</span><span class="o">.</span><span class="n">not_to</span> <span class="n">have</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="o">.</span><span class="n">users</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<pre>
+Failures:
+
+  1) Group#users when assigning to more than 10 users associations should not be stored
+     Failure/Error: expect(subject.users).not_to have(11).users
+       expected target not to have 11 users, got 11
+     # ./spec/models/group_spec.rb:21:in `block (4 levels) in <top (required)>'
+</pre>
+
+
+<p>After investigating this issue I found a <a href="http://mattberther.com/2012/09/09/validating-habtm-relationships-with-rails-3x">proposal for a solution</a> and a <a href="https://github.com/TylerRick/has_and_belongs_to_many_with_deferred_save">gem</a> that try to fix it. Neither of them worked in our Rails 3.2 environment. The last commit to the gem was 3 years ago and Rails 3 seems not to be supported. However <a href="https://github.com/MartinKoerner">MartinKoerner</a> extended the legacy gem and provides a gem that does the job for Rails 3: <a href="https://github.com/MartinKoerner/deferred_associations">deferred_associations</a>.</p>
+
+<p>Simply add <code>gem 'deferred_associations'</code> into your Gemfile and change <code>has_and_belongs_to_many</code> to <code>has_and_belongs_to_many_with_deferred_save</code> in your model class:</p>
+
+<figure class='code'><figcaption><span>app/models/group.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Group</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">has_and_belongs_to_many_with_deferred_save</span> <span class="ss">:users</span>
+</span><span class='line'>  <span class="n">validate</span> <span class="ss">:has_ten_or_less_users</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">has_ten_or_less_users</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:users</span><span class="p">,</span> <span class="s1">&#39;not more than 10 users allowed&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">users</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">10</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Et voilà, all examples are passing:</p>
+
+<pre>
+Group
+  #users
+    when assigning to one user
+      should be valid
+    when assigning to more than 10 users
+      should not be valid
+      associations should not be stored
+
+Finished in 0.15135 seconds
+3 examples, 0 failures
+</pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Merging I18n Translations for SimpleForm and Formtastic]]></title>
+    <link href="http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic/"/>
+    <updated>2013-01-16T19:11:00+01:00</updated>
+    <id>http://mikrobi.github.com/merging-i18n-translations-for-simpleform-and-formtastic</id>
+    <content type="html"><![CDATA[<p>In a current Rails project we are using <a href="https://github.com/plataformatec/simple_form">SimpleForm</a> to create forms in view templates. The backend is based on <a href="http://activeadmin.info">ActiveAdmin</a> that uses <a href="https://github.com/justinfrench/formtastic">Formtastic</a> for creating forms. As the application should support different languages we defined translations for labels, placeholders, hints and so on for the front-end (<a href="https://github.com/plataformatec/simple_form">SimpleForm</a>):</p>
+
+<figure class='code'><figcaption><span>config/locales/forms.de.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">de</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">simple_form</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">labels</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">first_name</span><span class="p-Indicator">:</span> <span class="s">&#39;Vorname&#39;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">last_name</span><span class="p-Indicator">:</span> <span class="s">&#39;Nachname&#39;</span>
+</span><span class='line'>        <span class="c1"># ...</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">placeholders</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">first_name</span><span class="p-Indicator">:</span> <span class="s">&#39;...&#39;</span>
+</span><span class='line'>        <span class="c1"># ...</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">hints</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">first_name</span><span class="p-Indicator">:</span> <span class="s">&#39;...&#39;</span>
+</span><span class='line'>        <span class="c1"># ...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Of course these translation should be used for the backend (<a href="https://github.com/justinfrench/formtastic">Formtastic</a>), too. Instead of defining these items again within the <code>formtastic</code> namespace, the merge operator of <a href="http://www.yaml.org">YAML</a> (<code>&lt;&lt;</code>) can be used to keep the locale file <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY</a>:</p>
+
+<figure class='code'><figcaption><span>config/locales/forms.de.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">de</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">simple_form</span><span class="p-Indicator">:</span> <span class="nl">&amp;form_definitions</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">labels</span><span class="p-Indicator">:</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">first_name</span><span class="p-Indicator">:</span> <span class="s">&#39;Vorname&#39;</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">formtastic</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">&lt;&lt; *from_definitions</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>simple_form</code> namespace is simply aliased with <code>form_definitions</code> and merged into the <code>formtastic</code> namespace.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a Free Blog in 10 Minutes with GitHub Pages and Octopress]]></title>
+    <link href="http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress/"/>
+    <updated>2013-01-16T14:58:00+01:00</updated>
+    <id>http://mikrobi.github.com/creating-a-free-blog-in-10-minutes-with-github-pages-and-octopress</id>
+    <content type="html"><![CDATA[<p>Today I decided to start a personal blog for sharing my thoughts, experiences and ideas about my work as a software developer. After a brief research on which blog system to use and where to (freely) host it, I came up with a solution based on <a href="http://octopress.org">Octopress</a> that runs on <a href="http://pages.github.com">GitHub Pages</a>. It&#8217;s completely free and (for people familiar with standard developer tools) easy to set up.</p>
+
+<!-- more -->
+
+
+<p>Here is how I created this blog within a few minutes:</p>
+
+<ol>
+<li>Create a <a href="http://www.github.com" title="GitHub">GitHub</a> repository named <code>username.github.com</code>, in my case <a href="http://mikrobi.github.com" title="Blog of Jakob Class">mikrobi.github.com</a>.</li>
+<li>(Optional) If you&#8217;d like to enable commenting on your blog posts, sign up at <a href="http://disqus.com">Disqus</a> and set up your new site.</li>
+<li>(Optional) In case you want to analyse your blog&#8217;s visitors and see if anyone is interested in your website at all, create a <a href="https://www.google.com/analytics">Google Analytics</a> account to receive a tracking ID for your blog.</li>
+<li>Download the current version of <a href="http://octopress.org">Octopress</a> into your desired folder and enter that folder, in my case <code>blog</code>:
+<pre>
+  $ git clone git://github.com/imathis/octopress.git blog
+  $ cd blog
+</pre></li>
+<li>Install and perform a basic setup of <a href="http://octopress.org">Octopress</a>:
+<pre>
+  $ bundle install
+  $ rake install
+  $ rake setup_github_pages
+</pre></li>
+<li>Refine the default configuration (e.g. name, subtitle, description <a href="https://www.google.com/analytics">Google Analytics</a> tracking ID and so on) by editing <code>_config.yml</code> with your favourite editor.</li>
+<li>Generate the necessary files for publishing your blog:
+<pre>
+  $ rake generate
+</pre></li>
+<li>Deploy your blog to <a href="http://www.github.com" title="GitHub">GitHub</a>:
+<pre>
+  $ rake deploy
+</pre></li>
+<li>Commit your sources into your repository:
+<pre>
+  git add .
+  git commit -m 'initial commit'
+  git push origin source
+</pre></li>
+<li>Write your first post:
+<pre>
+$ rake new_post["My First Blog Post"]
+</pre></li>
+</ol>
+
+
+<p>For detailed instructions refer to the <a href="http://octopress.org/docs">Octopress documentation</a>.</p>
+
+<p>Have fun reading my and running your own blog!</p>
+
+<p>Cheers, Jakob</p>
+]]></content>
+  </entry>
+  
+</feed>
