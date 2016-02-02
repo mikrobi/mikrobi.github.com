@@ -4,7 +4,7 @@
   <title><![CDATA[Jakob Class]]></title>
   <link href="http://mikrobi.github.com/atom.xml" rel="self"/>
   <link href="http://mikrobi.github.com/"/>
-  <updated>2016-01-30T17:23:14+01:00</updated>
+  <updated>2016-02-02T22:03:31+01:00</updated>
   <id>http://mikrobi.github.com/</id>
   <author>
     <name><![CDATA[Jakob Class]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Lessons I've learned being a team leader]]></title>
+    <link href="http://mikrobi.github.com/lessons-ive-learned-being-a-team-leader/"/>
+    <updated>2016-02-02T11:29:35+01:00</updated>
+    <id>http://mikrobi.github.com/lessons-ive-learned-being-a-team-leader</id>
+    <content type="html"><![CDATA[<p>In 2013 we started with our first HTML5 based version of the <a href="http://getmbrace.com">mbrace app</a>. After validating some of our initial hypotheses we started to scale our team to develop native mobile apps. I&rsquo;ve been responsible for building and leading the mobile iOS team. Since then I&rsquo;ve learned a lot of things beyond the scope of regular software development.</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p><strong>Build your team thoroughly!</strong>
+Before adding new members to your team you should precisely know what kind of talents you need. You should try to personally meet potential candidates as soon as possible. Coding challenges, CVs and portfolio website are good for pre scanning but you should spend as little time on these things as possible. You want to get to know the person behind these documents. Paid trial days with interesting candidates might seem expensive but at the end they are the best way to get a proper idea whether it&rsquo;s a fit or not.</p></li>
+<li><p><strong>Lead by example!</strong>
+As a team leader you have to be competent in what you are doing. You can&rsquo;t expect your team members to do things that you are not doing on your own. So stick to your own guidelines. Put some extra effort in clearly defining user stories or tasks. Review your own code before sending a pull request. Write proper specs instead of shipping the tests <em>&ldquo;later&rdquo;</em>. Automate as much as possible. Love your product. Be nice, open minded, clear and objective&hellip; The list is endless (<a href="http://amzn.to/1UGcgR1">this book</a> might be helpful). Just be awesome so that others will adapt your behaviour!</p></li>
+<li><p><strong>Teach and learn by doing things together!</strong>
+Detailed code reviews and pair programming might be time consuming especially at the beginning with junior developers but for us it has always paid off quickly. While being very strict and picky you should never get into the habit of <em>&ldquo;This is wrong. Let me quickly fix that for you. I&rsquo;ll be faster.&rdquo;</em> Constantly ask people why they did something their way and what they think about other solutions: <em>&ldquo;Why did you name that variable <code>sumC</code>? What about <code>sumOfCheckout</code>&rdquo;</em> vs. <em>&ldquo;This variable should be called <code>sumOfCheckout</code>!&rdquo;</em> Rather assist people in developing a good solution instead of presenting your <em>&ldquo;perfect&rdquo;</em> solution directly. The more people have to reason their decisions the more they think and the better they get over time.</p></li>
+<li><p><strong>Transfer ownership!</strong>
+As a team leader you want to enable your team members instead of controlling them. Show your team members that you trust in their capabilities! When delegating big tasks and responsibility, people are more challenged. They learn faster and become more motivated. You want to form a team of autonomous talents not an army of coding robots.</p></li>
+<li><p><strong>Encourage people to ask questions!</strong>
+It&rsquo;s appreciated to ask questions! There is nothing worse then a developer fighting with a problem that they can&rsquo;t solve on their own. Especially new and inexperienced team members might feel unconfident admitting that they don&rsquo;t progress. This is poison! Always show your team members that you are interested in what they are doing and offer your help for any kind of issue that may come up. At the beginning it might be helpful to <em>friendly(!)</em> ask for the current status several times a day to establish the habit of transparent and regular status reports.</p></li>
+<li><p><strong>Feeback!</strong>
+Reflection and feedback are the keys for improvement. There should be regular one-on-one feedback sessions. At the beginning they might have to happen every week .
+Always ask yourself these questions: What are you expecting from your team members? What is going well? What can be improved? Never provide criticism without a proposal of how to do better. Giving feedback is very important for enabling your team members to grow. Equally important is asking for feedback for yourself. For me it&rsquo;s important to show people that I&rsquo;m really open to criticism and I want to hear what they don&rsquo;t like. I&rsquo;ve realized that some people tend to tell me <em>&ldquo;I think you&rsquo;re doing a good job. I like working with you.&rdquo;</em> So I usually think about my own mistakes up front and present them: <em>&ldquo;I have the feeling that I&rsquo;ve kind of excluded you when we decided on the scope of feature XYZ that you&rsquo;re working on. Do you share this opinion with me? Do you think our decision should be more transparent?&rdquo;</em></p></li>
+<li><p><strong>Be professional and stay cool!</strong>
+Even a great team might get into heavy discussions. Convincing people by arguments and knowledge is always better than convincing by authority or power. If someone insists on their opinion although you think it&rsquo;s not the <em>&ldquo;right&rdquo;</em> one, ask for references like offical blog posts, talks by prominent developers and so on that support that opinion. Never become emotional or insulting. Stop a discussion when it&rsquo;s getting pointless and take a break by switching to another topic or task for a few hours.</p></li>
+<li><p><strong>Make your team members socialize!</strong>
+Networking with other developers is fun and very helpful to broaden one&rsquo;s mind and skills. Bring your team members to meetups, conferences and similar events. Introduce them to your fellow developers and make them part of the community!</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to recover your local Octopress repository]]></title>
