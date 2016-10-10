@@ -8,6 +8,4 @@ Hi there! I'm Jakob, a software engineer living in Berlin, Germany. My main focu
 
 Right now I'm maintaining the backends of the [mbrace](http://getmbrace.com) and [Roundhere](http://www.roundhere.me) apps and [leading their iOS mobile team](../lessons-ive-learned-being-a-team-leader/).
 
-You can find me on [GitHub](https://github.com/mikrobi "Jakob Class on GitHub"), on [LinkedIn](https://www.linkedin.com/in/jakobclass "Jakob Class on LinkedIn") and on [Twitter](https://twitter.com/classisch "Jakob Class on Twitter").
-
-
+You can find me on [GitHub](https://github.com/mikrobi "Jakob Class on GitHub") and [Twitter](https://twitter.com/classisch "Jakob Class on Twitter").
