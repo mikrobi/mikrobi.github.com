@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://mikrobi.github.com/sitemap.xml 
